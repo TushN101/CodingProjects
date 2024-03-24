@@ -80,9 +80,13 @@ wordlist_entry.pack(side=tk.LEFT, ipady=7, padx=5)
 select_wordlist_button = tk.Button(wordlist_frame, text="...", command=select_wordlist, bg=button_color, fg="white", font=("Arial", 11), relief="flat", activebackground=accent_color, activeforeground="white")
 select_wordlist_button.pack(side=tk.LEFT, pady=10, padx=5)
 
+output_frame = tk.Frame(root, bg="#36393f")
+output_frame.pack(pady=5)
+output = tk.Entry(output_frame, width=50, bd=0, bg="#2c2f33", fg="#777777", font=("Arial", 11), justify='center')
+output.pack(side=tk.LEFT, ipady=180, padx=20) 
 
 scan_button = tk.Button(root, text="Scan Website", command=scan_website, bg=button_color, fg="white", font=("Arial", 11), relief="flat", activebackground=accent_color, activeforeground="white")
-scan_button.pack(pady=10)
+scan_button.pack(pady=20)
 
 
 root.mainloop()
