@@ -25,4 +25,3 @@ To utilize the Website Directory Scanner, adhere to the following steps:
 ## Poster
 ![Poster](https://github.com/TushN101/CodingProjects/assets/143404072/095f7640-d833-424b-b5d0-4449fa368def)
 
-Feel free to adjust the URL for the poster image based on the actual location of the image in your repository.
