@@ -1,6 +1,7 @@
 import tkinter as tk
 import os
 from tkinter import filedialog
+from tabulate import tabulate
 
 def banner():
     _ = os.system('cls')
@@ -14,6 +15,7 @@ def banner():
 
 def main_menu():
     while True:
+        banner()
         print("     ------------------------------------------------ \n")
         print("     1. Open an existing database \n")
         print("     2. Create a new database \n")
@@ -24,8 +26,8 @@ def main_menu():
         elif choice == "2":
             create_new_database()
         elif choice == "3":
-            print(" Exiting the program. Goodbye!")
-            break
+            print("\n     Exiting the program. Goodbye!")
+            os._exit(0)
         else:
             print(" Invalid choice. Please enter 1, 2, or 3.")
 
@@ -43,20 +45,19 @@ def open_existing_database():
 def create_new_database():
     banner()
     global db_name, master_password, documents_folder, file_path
-    db_name = input("   Enter the name of your database: ")
-    master_password = input("   Enter the master password for your database: ")
+    db_name = input("\n    Enter the name of your database: ")
+    master_password = input("\n    Enter the master password for your database: ")
     documents_folder = os.path.expanduser("~/Documents")
     file_path = os.path.join(documents_folder, f"{db_name}.txt")
     with open(file_path, "w") as file:
-        file.write("\n")
+        file.write("")
     options()
 
 def manage_database():
     banner()
     print(f"\n    Database file '{db_name}' selected in '{file_path}'. \n")
     print(f"    Now handling the database '{db_name}' \n")
-    input("    Press enter to continue...")
-    options()
+    loader()
 
 def options():
     banner()
@@ -77,38 +78,137 @@ def options():
     elif choice == "3":
         delete_entry()
     elif choice == "4":
-        print("Exiting the database management system.")
+        main_menu()
     else:
-        print("Invalid choice. Please enter a number from 0 to 4.")
+        print("     Invalid choice. Please enter a number from 0 to 4.")
 
 def view_entries(file_path):
     banner()
     with open(file_path, 'r') as file:
-        print(file.read())
-    input("     Press enter to continue....")
-    options()
+        entries = [line.strip().split("\t") for line in file]
+        table = tabulate(entries, headers=["Id", "Title", "Username", "Password"], tablefmt="grid")
+        indented_table = "\n".join(["    " + line for line in table.split("\n")])
+        print(indented_table)   
+    loader()
 
 def create_entry(file_path):
     banner()
-    title = input("\n Enter the name of the entry: ")
-    uname = input("\n Enter the username / email: ")
-    passwd = input("\n Enter the password: ")
-
+    title = input("\n    Enter the name of the entry: ")
+    uname = input("\n    Enter the username / email: ")
+    passwd = input("\n    Enter the password: ")
+    id = get_id()
     with open(file_path, "a") as file:
-        file.write(f"{title}\t{uname}\t{passwd}\n")
-        print("Entry added successfully.")
+        file.write(f"  {id}\t{title}\t{uname}\t{passwd}\n")
+        print("\n    Entry added successfully.")
     
-    input("Press enter to continue..")
-    options()
+    loader()
+
+def get_id():
+    if os.path.exists(file_path):
+        with open(file_path, 'r') as file:
+            lines = file.readlines()
+            if lines:
+                last_line = lines[-1]
+                last_id = int(last_line.strip().split("\t")[0])
+                return last_id + 1
+            else:
+                return 1  # If file is empty, start with ID 1
+    else:
+        return 1  # If file doesn't exist, start with ID 1
+
 
 def edit_entry():
-    print("Enter the index of your entry")
-    print("Feature not implemented yet....")
+    banner()
+    
+    with open(file_path, 'r') as file:
+        entries = [line.strip().split("\t") for line in file]
+        table = tabulate(entries, headers=["Id", "Title", "Username", "Password"], tablefmt="grid")
+        indented_table = "\n".join(["    " + line for line in table.split("\n")])
+        print(indented_table)   
+
+    entry_id = int(input("\n    Enter the ID of the entry you want to edit: "))
+
+    entries = []
+    with open(file_path, 'r') as file:
+        for line in file:
+            entry = line.strip().split("\t")
+            entries.append(entry)
+    
+    entry_found = False
+    for entry in entries:
+        if int(entry[0]) == entry_id:
+            entry_found = True
+          
+            print(f"\n    Editing Entry ID: {entry[0]}")
+            new_title = input("\n    Enter new title(or 0 to keep it same): ")
+            new_username = input("\n    Enter new username(or 0 to keep it same): ")
+            new_password = input("\n    Enter new password(or 0 to keep it same): ")
+            
+            if new_title != "0":
+                entry[1] = new_title
+            if new_username != "0":
+                entry[2] = new_username
+            if new_password != "0":
+                entry[3] = new_password
+            
+            break
+    
+    if not entry_found:
+        print(f"Entry with ID {entry_id} not found.")
+    else:
+        # Rewrite the file with updated entries
+        with open(file_path, 'w') as file:
+            for entry in entries:
+                file.write("\t".join(entry) + "\n")
+        
+        print("\n    Entry updated successfully.")
+
+    loader()
+
 
 def delete_entry():
-    print("Enter the index of the entry")
-    print("Feature not implemented yet...")
+    banner()
+
+    with open(file_path, 'r') as file:
+        entries = [line.strip().split("\t") for line in file]
+        table = tabulate(entries, headers=["Id", "Title", "Username", "Password"], tablefmt="grid")
+        indented_table = "\n".join(["    " + line for line in table.split("\n")])
+        print(indented_table)   
+
+    entry_id = int(input("\n    Enter the ID of the entry you want to delete: "))
+    
+    entries = []
+    with open(file_path, 'r') as file:
+        for line in file:
+            entry = line.strip().split("\t")
+            entries.append(entry)
+    
+    entry_found = False
+    new_entries = []
+    for entry in entries:
+        if int(entry[0]) == entry_id:
+            entry_found = True
+            print(f"\n    Deleting Entry ID: {entry[0]}")
+        else:
+            new_entries.append(entry)
+    
+    if not entry_found:
+        print(f"\n    Entry with ID {entry_id} not found.")
+
+    else:
+        with open(file_path, 'w') as file:
+            for idx, entry in enumerate(new_entries, start=1):
+                entry[0] = str(idx)  # Update the ID
+                file.write("\t".join(entry) + "\n")
+        
+        print("\n    Entry deleted successfully.")
+    
+    loader()
+
+def loader():
+    input("\n    Press enter to continue...")
+    options()
+
 
 if __name__ == "__main__":
-    banner()
     main_menu()
