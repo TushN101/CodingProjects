@@ -1,0 +1,106 @@
+<!-- templates/download.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Download YouTube Video</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #1c1c1c;
+            color: #fff; 
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-image: radial-gradient(circle at 50% 50%, #363636, #1c1c1c);
+        }
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            background-color: #282828; 
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            display: flex;
+            align-items: flex-start;
+        }
+        .thumbnail-container {
+            margin-right: 20px;
+            flex: 0 0 300px; 
+        }
+        .thumbnail {
+            width: 100%;
+            height: fit-content; 
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2); 
+            transition: transform 0.3s ease; 
+        }
+        .thumbnail:hover {
+            transform: scale(1.05);
+        }
+        .video-details {
+            flex: 1; 
+            padding-top: 0px; 
+            margin-bottom: 20px; 
+        }
+        .info-box {
+            text-align: left;
+        }
+        .download-options {
+            background-color: #363636;
+            padding: 30px;
+            border-radius: 8px;
+            text-align: left;
+            width: 200px; 
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2); 
+        }
+        .download-options h3 {
+            color: #fff;
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+        .download-btn {
+            display: block;
+            width: 80%;
+            padding: 10px 20px;
+            margin-bottom: 10px;
+            background-color: #4CAF50; 
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+            text-align: center;
+        }
+        .download-btn:hover {
+            background-color: #45a049; 
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="thumbnail-container">
+            <img src="{{ video.thumbnail }}" alt="Video Thumbnail" class="thumbnail">
+        </div>
+        <div class="video-details">
+            <h2 style="overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical;">
+                {{ video.title }}
+            </h2>
+            <div class="info-box">
+                <p>Upload Date: {{ video.upload_date }}</p>
+                <p>Views: {{ video.views }}</p>
+                <p>Duration: {{ video.duration }}</p>
+            </div>
+        </div>
+        <div class="download-options">
+            <h3>Download Options:</h3>
+            <a href="{{ url_for('download_mp4', url=url) }}" class="download-btn">Download as MP4</a>
+            <a href="{{ url_for('download_mp3', url=url) }}" class="download-btn">Download as MP3</a>
+        </div>
+    </div>
+</body>
+
+</html>

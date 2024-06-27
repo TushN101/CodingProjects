@@ -1,0 +1,91 @@
+<!-- templates/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube Video Downloader</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #1c1c1c;
+            color: #fff; 
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-image: radial-gradient(circle at 50% 50%, #363636, #1c1c1c);
+        }
+        .container {
+            width: 100%;
+            max-width: 400px;
+            background-color: #282828;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            text-align: center;
+        }
+        .profile-picture {
+            width: 100px; 
+            height: 100px; 
+            border-radius: 50%;
+            margin-bottom: 20px;
+            cursor: pointer;
+        }
+        h1 {
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+        input[type="text"] {
+            width: calc(100% - 24px);
+            padding: 12px;
+            margin-bottom: 20px;
+            box-sizing: border-box;
+            border: 1px solid #444; 
+            border-radius: 8px;
+            font-size: 14px;
+            background-color: #363636; 
+            color: #fff; 
+            text-align: center; 
+            transition: border-color 0.3s ease;
+        }
+        input[type="text"]::placeholder {
+            text-align: center; 
+            color: #888; 
+        }
+        input[type="text"]:focus {
+            border-color: #4CAF50; 
+            outline: none; 
+        }
+        button[type="submit"] {
+            background-color: #4CAF50;
+            color: #fff;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.3s ease;
+            outline: none;
+        }
+        button[type="submit"]:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="https://github.com/TushN101" target="_blank">
+            <img src="{{ url_for('static', filename='pfp.png') }}" alt="Profile Picture" class="profile-picture">
+        </a>
+        <h1>YouTube Video Downloader</h1>
+        <form action="{{ url_for('download') }}" method="post">
+            <input type="text" name="url" placeholder="Enter YouTube video URL" autocomplete="off" required>
+            <br>
+            <button type="submit">Download</button>
+        </form>
+    </div>
+</body>
+</html>
