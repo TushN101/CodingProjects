@@ -1,0 +1,7 @@
+dashboard page
+login page
+registration page
+forget password page
+account locking
+rate limiting
+password strength checking

@@ -1,0 +1,100 @@
+<!-- This is a reset account page template -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>reset</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background-color: #202225; 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh; 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            color: #ffffff; 
+        }
+        .reset-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh; 
+            width: 100%;
+            padding: 0 20px; 
+            box-sizing: border-box; 
+        }
+        .reset-form {
+            background-color: #36393f; 
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            width: 320px;
+            max-width: 100%; 
+        }
+        .reset-form h2 {
+            margin-bottom: 20px;
+            font-size: 24px;
+            color: #ffffff; 
+        }
+        .reset-form input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 6px;
+            background-color: #2f3136; 
+            color: #ffffff; 
+            font-size: 14px; 
+            outline: none; 
+            transition: background-color 0.3s, box-shadow 0.3s;
+        }
+        .reset-form input[type="text"]::placeholder {
+            color: #777; 
+        }
+        .reset-form input[type="text"]:focus {
+            background-color: #40444b; 
+            box-shadow: 0 0 8px rgba(0, 0, 0, 0.3); 
+        }
+        .reset-form button {
+            width: 100%; 
+            padding: 12px;
+            margin-top: 20px;
+            border: none;
+            border-radius: 6px;
+            background-color: #7289da; 
+            color: #ffffff; 
+            font-size: 16px; 
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .reset-form button:hover {
+            background-color: #677bc4; 
+        }
+
+    </style>
+</head>
+<body>
+    <div class="reset-container">
+        <div class="reset">
+            <form class="reset-form" action="{{ url_for('reset') }}" method="post">
+                <h2>Reset Password</h2>
+                <input type="hidden" name="email" value="{{ email }}"> 
+                <p style="font-size: 14px;">Answer the Secret Question of : {{ email }} </p> <br>
+                <br><p style="font-size: 14px;text-align: left;">{{ question }} </p>
+                <input type="text" name="answer" placeholder="Answer" required><br>
+                <br><p style="font-size: 14px;text-align: left;">Enter your new password:</p>
+                <input type="text" name="password" placeholder="New Password" required><br> 
+                <button type="submit">Reset</button><br>
+                <br><p style="color: #fa8072; font-size: 12px;">{{ error }}</p>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

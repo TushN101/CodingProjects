@@ -1,0 +1,98 @@
+<!-- This is a recovery page template -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>recovery</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background-color: #202225; 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh; 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            color: #ffffff; 
+        }
+        .recovery-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh; 
+            width: 100%;
+            padding: 0 20px; 
+            box-sizing: border-box; 
+        }
+        .recovery-form {
+            background-color: #36393f; 
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            width: 320px;
+            max-width: 100%; 
+        }
+        .recovery-form h2 {
+            margin-bottom: 20px;
+            font-size: 24px;
+            color: #ffffff; 
+        }
+        .recovery-form input[type="email"],
+        .recovery-form input[type="password"] {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 6px;
+            background-color: #2f3136; 
+            color: #ffffff; 
+            font-size: 14px; 
+            outline: none; 
+            transition: background-color 0.3s, box-shadow 0.3s;
+        }
+        .recovery-form input[type="email"]::placeholder,
+        .recovery-form input[type="text"]::placeholder {
+            color: #777; 
+        }
+        .recovery-form input[type="email"]:focus,
+        .recovery-form input[type="text"]:focus {
+            background-color: #40444b; 
+            box-shadow: 0 0 8px rgba(0, 0, 0, 0.3); 
+        }
+        .recovery-form button {
+            width: 100%; 
+            padding: 12px;
+            margin-top: 20px;
+            border: none;
+            border-radius: 6px;
+            background-color: #7289da; 
+            color: #ffffff; 
+            font-size: 16px; 
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .recovery-form button:hover {
+            background-color: #677bc4; 
+        }
+
+    </style>
+</head>
+<body>
+    <div class="recovery-container">
+        <div class="recovery">
+            <form class="recovery-form" action="{{ url_for('recovery') }}" method="post">
+                <h2>Recover Account</h2>
+                <input type="email" placeholder="Enter your Email" name="email" required>
+                <button type="submit">Recover</button><br>
+                <br><p style="color: #fa8072; font-size: 12px;">{{ error }}</p>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

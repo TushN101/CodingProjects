@@ -1,0 +1,14 @@
+{
+    "admin@admin.com": {
+        "password": "Test@123",
+        "secret_question": "What is your pet's name?",
+        "secret_answer": "Catty",
+        "counter": 2
+    },
+    "test@gmail.com": {
+        "password": "Temp@1234",
+        "secret_question": "What is your pet's name?",
+        "secret_answer": "Catty",
+        "counter": 1
+    }
+}

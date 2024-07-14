@@ -1,0 +1,168 @@
+<!-- This is a registration page template -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Page</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #202225; 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh; 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            color: #ffffff; 
+        }
+
+        .register-container {
+            width: 100%;
+            padding: 0 20px; 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .register-form {
+            background-color: #36393f; 
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            width: 320px;
+            max-width: 100%; 
+        }
+
+        .register-form h2 {
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+
+        .register-form input,
+        .register-form select {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 6px;
+            background-color: #2f3136; 
+            color: #ffffff; 
+            font-size: 14px; 
+            outline: none; 
+            transition: background-color 0.3s, box-shadow 0.3s;
+        }
+
+        .register-form input::placeholder {
+            color: #777; 
+        }
+
+        .register-form input:focus,
+        .register-form select:focus {
+            background-color: #40444b; 
+            box-shadow: 0 0 8px rgba(0, 0, 0, 0.3); 
+        }
+
+        .register-form button {
+            width: 100%; 
+            padding: 12px;
+            margin-top: 20px;
+            border: none;
+            border-radius: 6px;
+            background-color: #7289da; 
+            color: #ffffff; 
+            font-size: 16px; 
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .register-form button:hover {
+            background-color: #677bc4; 
+        }
+
+        .register-form p {
+            margin-top: 10px;
+            font-size: 13px; 
+            color: #bbb; 
+        }
+
+        .register-form p a {
+            color: #7289da; 
+            text-decoration: none;
+        }
+
+        .register-form p a:hover {
+            text-decoration: underline;
+        }
+
+        .register-form select {
+            position: relative; 
+        }
+
+        .register-form select::after {
+            content: '';
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            border: solid transparent;
+            border-width: 5px 5px 0; 
+            border-top-color: #ffffff; 
+            pointer-events: none; 
+        }
+
+        .register-form select option {
+            color: #777; 
+        }
+
+        .register-form select option:disabled {
+            color: #bbb; 
+        }
+
+        .register-form ul{
+            font-size: 10px;
+            text-align: left;
+            color: #999999;"
+        }
+
+    </style>
+
+</head>
+<body>
+    <div class="register-container">
+        <div class="register">
+            <form class="register-form" action="{{ url_for('register') }}" method="post">
+                <h2>Register</h2>
+                <input type="email" placeholder="Enter your email" name="email" required>
+                <input type="password" placeholder="Enter your password" name="password" required>
+                <br><br>
+
+                <select name="security_question" id="security-question" required>
+                    <option value="" disabled selected>Select a security question</option>
+                    <option value="What is your pet's name?">What is your pet's name?</option>
+                    <option value="What is your childhood nickname?">What is your childhood nickname?</option>
+                </select>
+
+                <input type="text" placeholder="Your answer" name="security_answer" required>
+                
+                <button type="submit">Register</button><br>
+                <p style="color: #fa8072;">{{ error }}</p>
+                <ul>
+                    <li>Password should be more than 8 characters</li>
+                    <li>Password should contain at least one capital letter</li>
+                    <li>Password should contain at least one small letter</li>
+                    <li>Password should contain at least one digit</li>
+                    <li>Password should contain at least one special character</li>
+                </ul>
+            </form>
+
+        </div>
+    </div>
+</body>
+</html>
